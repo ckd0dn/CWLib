@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace CWLib
 {
@@ -20,7 +19,6 @@ namespace CWLib
                 if (_soundRoot == null)
                 {
                     _soundRoot = new GameObject { name = "@SoundRoot" };
-                    Object.DontDestroyOnLoad(_soundRoot);
 
                     var soundTypeNames = Enum.GetNames(typeof(BaseDefine.Sound));
                     for (var count = 0; count < soundTypeNames.Length - 1; count++)
@@ -43,7 +41,7 @@ namespace CWLib
             _audioClips.Clear();
         }
 
-        public void Play(BaseDefine.Sound type, string key, float pitch = 1.0f)
+        public void Play(BaseDefine.Sound type, string key, float pitch = 1.0f, float volume = 1.0f)
         {
             var audioSource = _audioSources[(int)type];
 
@@ -52,6 +50,7 @@ namespace CWLib
                 if (audioSource.isPlaying)
                     audioSource.Stop();
 
+                audioSource.volume = volume;
                 audioSource.clip = audioClip;
                 audioSource.Play();
             });
