@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CWLib
 {
@@ -11,7 +12,7 @@ namespace CWLib
 
         private GameObject _soundRoot;
 
-        public void Init()
+        public void Init(bool isDestroy)
         {
             if (_soundRoot == null)
             {
@@ -19,6 +20,10 @@ namespace CWLib
                 if (_soundRoot == null)
                 {
                     _soundRoot = new GameObject { name = "@SoundRoot" };
+                    if (!isDestroy)
+                    {
+                        Object.DontDestroyOnLoad(_soundRoot);
+                    }
 
                     var soundTypeNames = Enum.GetNames(typeof(BaseDefine.Sound));
                     for (var count = 0; count < soundTypeNames.Length - 1; count++)

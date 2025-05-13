@@ -6,7 +6,7 @@ namespace CWLib
     {
         protected RectTransform rect;
 
-        private void Start()
+        protected virtual void Awake()
         {
             rect = GetComponent<RectTransform>();
             rect.localScale = Vector3.one;
