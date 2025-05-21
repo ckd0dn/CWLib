@@ -38,6 +38,9 @@ namespace CWLib
             T ui = Managers.Resource.Instantiate(key, pooling: false).GetOrAddComponent<T>();
 
             _uiDictionary[key] = ui;
+            
+            // ui on the top
+            ui.transform.SetAsLastSibling();
 
             // RefreshTimeScale();
 
